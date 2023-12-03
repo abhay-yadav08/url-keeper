@@ -1,47 +1,50 @@
 
+let myUrls = [];
 
-let myLeads = []
+const inputEl = document.querySelector("#input-el");
+const btn = document.querySelector("#input-btn")
+const ulEl = document.querySelector("#ul-el");
+const deleteBtn = document.querySelector("#delete-btn");
 
-const inputEl = document.getElementById("input-el")
-
-const inputBtn = document.getElementById("input-btn")
-
-const ulEl = document.getElementById("ul-el")
-
-let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myUrls"));
 
 if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage
-    renderLeads()
+    myUrls = leadsFromLocalStorage;
+    renderFxn(myUrls);
 }
 
-localStorage.clear()
+deleteBtn.addEventListener("click", () => {
 
-inputBtn.addEventListener("click", function () {
-
-
-    myLeads.push(inputEl.value)
-    // console.log(myLeads)
-    inputEl.value = ""
-
-    localStorage.setItem("myLeads", JSON.stringify(myLeads))
-
-    renderLeads()
+    localStorage.clear();
+    myUrls = [];
+    renderFxn(myUrls);
 })
 
-function renderLeads() {
-    let listItems = ""
+btn.addEventListener("click", () => {
+    // console.log("button clicked");
 
-    for (let i = 0; i < myLeads.length; i++) {
-        listItems += `
-        
-        <li>
-            <a target = '_blank' href = '${myLeads[i]}'> ${myLeads[i]}</a>
-        </li>
-        
-        `
+    let inputValue = inputEl.value;
+    myUrls.push(inputValue);
+    inputEl.value = "";
+
+
+    localStorage.setItem("myUrls", JSON.stringify(myUrls));
+
+
+    renderFxn(myUrls)
+    // console.log(myLeads);
+
+    console.log(localStorage.getItem("myUrls"));
+
+})
+
+
+function renderFxn(myArr) {
+    let listItems = "";
+    for (let i = 0; i < myArr.length; i++) {
+        listItems += `<li><a href=${myArr[i]} target=_blank>${myArr[i]}</a></li>`;
     }
 
-    ulEl.innerHTML = listItems
+    ulEl.innerHTML = listItems;
 }
 
