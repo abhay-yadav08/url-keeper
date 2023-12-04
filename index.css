@@ -41,3 +41,17 @@ ul li {
 ul li a {
     color: #5f9341;
 }
+
+#credits {
+    color: #5f9341;
+}
+
+#credits p {
+    padding: 0;
+    margin: 0;
+}
+
+#credits a {
+    color: #5f9341;
+    text-decoration: none;
+}
